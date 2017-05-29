@@ -50,6 +50,8 @@ keep_log: true
 log_format: {end: "\033[0m", fail: "\033[91m", header: "\033[95m", info: "\033[94m", success: "\033[92m", warn: "\033[93m"}
 log_levels: [fail, warn]
 verbose: true
+show_caller: true
+show_timestamp: true
 ```
 
 You can edit this file directly to change settings. Here's what each one does:
@@ -59,6 +61,7 @@ You can edit this file directly to change settings. Here's what each one does:
 * `log_levels` is a list of `log_format` keys that should be written to log files. This does nothing if `keep_log` is false.
 * `verbose` tells the `log` module whether to print logs to the console.
 * `force_print` is a list of `log_format` keys that should always be written to the console. This is very useful for cron jobs, as you can set `verbose` to false but ensure that errors are written, e.g. to trigger an email.
+* `show_caller` and `show_timestamp` allow for flexible formatting of logs printed to console.
 * `debug` is a flag to determine whether errors should be fatal or silent.
 
 The defaults are set by `__init__.py` and are used only if no `config.yml` file is found.

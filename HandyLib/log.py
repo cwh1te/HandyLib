@@ -45,15 +45,43 @@ def log(message, log_type = "info", force = False, caller = False):
 
     # Print if running in verbose mode or if "force" is true or if log type is configured to always print
     if config["verbose"] or force or log_type in config["force_print"]:
-        print( # Format: [caller] message - timestamp
-            "{0}[{1}] {2} - {3}{4}".format(
-                config["log_format"][log_type],
-                caller,
-                message,
-                time.strftime(config["datetime_format"]),
-                config["log_format"]["end"]
+        if config["show_caller"] and config["show_timestamp"]:
+            print( # Format: [caller] message - timestamp
+                "{0}[{1}] {2} - {3}{4}".format(
+                    config["log_format"][log_type],
+                    caller,
+                    message,
+                    time.strftime(config["datetime_format"]),
+                    config["log_format"]["end"]
+                )
             )
-        )
+        elif config["show_caller"]:
+            print( # Format: [caller] message
+                "{0}[{1}] {2}{3}".format(
+                    config["log_format"][log_type],
+                    caller,
+                    message,
+                    config["log_format"]["end"]
+                )
+            )
+        elif config["show_timestamp"]:
+            print( # Format: message - timestamp
+                "{0}{1} - {2}{3}".format(
+                    config["log_format"][log_type],
+                    message,
+                    time.strftime(config["datetime_format"]),
+                    config["log_format"]["end"]
+                )
+            )
+        else:
+            print( # Format: message
+                "{0}{1}{2}".format(
+                    config["log_format"][log_type],
+                    message,
+                    config["log_format"]["end"]
+                )
+            )
+
 
     # Log to file if appropriate and possible
     if config["keep_log"]:

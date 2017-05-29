@@ -26,6 +26,10 @@ if not config:
     config["force_print"] = ["fail", ]
     config["verbose"] = True
 
+    # Settings for logs messages printed to console
+    config["show_timestamp"] = True
+    config["show_caller"] = True
+
     # log_levels defines which, if any, log types to save in a log file
     # this only has an effect if keep_log is true
     config["log_levels"] = ["fail", "warn", ]
