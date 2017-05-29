@@ -1,0 +1,4 @@
+distutils
+functools
+hashlib
+yaml
