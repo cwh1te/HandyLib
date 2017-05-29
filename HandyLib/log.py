@@ -34,15 +34,6 @@ def log(message, log_type = "info", force = False, caller = False):
         log("Invalid log_type specified by {0}: {1}".format(caller, log_type), "warn", True, __name__)
         log_type = "info"
 
-    # Construct log output with the format: [caller] message - timestamp
-    output = "{0}[{1}] {2} - {3} {4}".format(
-        config["log_format"][log_type],
-        caller,
-        message,
-        time.strftime(config["datetime_format"]),
-        config["log_format"]["end"]
-    )
-
     # Print if running in verbose mode or if "force" is true or if log type is configured to always print
     if config["verbose"] or force or log_type in config["force_print"]:
         if config["show_caller"] and config["show_timestamp"]:
