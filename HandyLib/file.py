@@ -16,7 +16,7 @@ def sha256(filename):
 			[sha2h.update(chunk) for chunk in iter(functools.partial(f.read, 256), b"")]
 	except:
 		log("Failed to calculate SHA256 for file: {0}".format(filename), "fail")
-		if config("debug"): raise
+		if config["debug"]: raise
 		return False
 	return sha2h.hexdigest()
 
@@ -102,7 +102,7 @@ def extract_file(filepath, filename, flat=False, loop=True):
 			os.remove(os.path.join(filepath, filename))
 		except:
 			log("Unable to expand ZIP archive {0}. You should check its headers or something.".format(filename), "fail")
-			if config("debug"): raise
+			if config["debug"]: raise
 			return False
 
 	# GZIP compression
@@ -117,7 +117,7 @@ def extract_file(filepath, filename, flat=False, loop=True):
 			os.remove(os.path.join(filepath, filename))
 		except:
 			log("Unable to expand GZIP file {0}. It's likely malformed.".format(filename), "fail")
-			if config("debug"): raise
+			if config["debug"]: raise
 			return False
 
 	# TAR archives
@@ -138,7 +138,7 @@ def extract_file(filepath, filename, flat=False, loop=True):
 			os.remove(os.path.join(filepath, filename))
 		except:
 			log("Unable to expand TAR archive {0}. Something is wrong with it.".format(filename), "fail")
-			if config("debug"): raise
+			if config["debug"]: raise
 			return False
 
 	# The file is not compressed or archived, or not a supported format
